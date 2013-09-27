@@ -1,13 +1,9 @@
 require 'test/unit'
-require './event.rb'
-
-class Klass
-   include EventDispatcher::Event
-end
+require '../lib/event.rb'
 
 class EventTest < Test::Unit::TestCase
    def setup
-      @event = Klass.new 
+      @event = TestEventClass.new 
    end
 
    def test_is_propagation_stopped
@@ -18,4 +14,8 @@ class EventTest < Test::Unit::TestCase
       @event.stop_propagation
       assert_equal true, @event.propagation_stopped?
    end
+end
+
+class TestEventClass
+   include EventDispatcher::Event
 end
