@@ -32,8 +32,7 @@ module EventDispatcher
          @sorted[event_name] = {} 
          
          if @listeners[event_name]
-            #@listeners[event_name].sort!
-            @sorted[event_name] = @listeners[event_name].dup
+            @sorted[event_name] = @listeners[event_name].sort
          end
       end
    end
