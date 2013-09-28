@@ -1,5 +1,6 @@
 module EventDispatcher
    class Dispatcher
+      attr_accessor :listeners
       def initialize
          @listeners = {}
          @sorted = {}
@@ -29,7 +30,7 @@ module EventDispatcher
       end
     
       def sort_listeners!( event_name )
-         @sorted[event_name] = {} 
+         @sorted[event_name] = [] 
          
          if @listeners[event_name]
             @sorted[event_name] = @listeners[event_name].sort
