@@ -35,12 +35,25 @@ class DispatcherTest < Test::Unit::TestCase
       listener5 = TestEventListener.new       
       listener6 = TestEventListener.new       
 
-      @dispatcher.add_listener( :pre_foo, { object: listener1, method: 'pre_foo_invoked!' }, 3)
+      @dispatcher.add_listener( :pre_foo, { object: listener1, method: 'pre_foo_invoked!' }, 10)
       @dispatcher.add_listener( :pre_foo, { object: listener2, method: 'pre_foo_invoked!' })
       @dispatcher.add_listener( :pre_foo, { object: listener3, method: 'pre_foo_invoked!' }, -10)
+
       @dispatcher.add_listener( :post_foo, { object: listener4, method: 'post_foo_invoked!' }, -10)
       @dispatcher.add_listener( :post_foo, { object: listener5, method: 'post_foo_invoked!' } )
       @dispatcher.add_listener( :post_foo, { object: listener6, method: 'post_foo_invoked!' }, 10)
+
+      assert_equal [:pre_foo, :post_foo], @dispatcher.get_listeners.keys 
+
+      assert_equal true,  @dispatcher.get_listeners( :pre_foo )[0].include?( -10 )
+      assert_equal true,  @dispatcher.get_listeners( :pre_foo )[1].include?( 0 )
+      assert_equal true,  @dispatcher.get_listeners( :pre_foo )[2].include?( 10 )
+
+      assert_equal true,  @dispatcher.get_listeners( :post_foo )[0].include?( -10 )
+      assert_equal true,  @dispatcher.get_listeners( :post_foo )[1].include?( 0 )
+      assert_equal true,  @dispatcher.get_listeners( :post_foo )[2].include?( 10 )
+
+     
    end
 end
 
