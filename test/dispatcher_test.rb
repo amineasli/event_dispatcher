@@ -57,9 +57,9 @@ class DispatcherTest < Test::Unit::TestCase
    def test_remove_listener
       @dispatcher.add_listener( :pre_foo, { object: @listener, method: 'PreFoo' }, 10)
       assert_equal true, @dispatcher.has_listeners?( PREFOO )
-      @dispatcher.remove_listeners( :pre_foo, { object: @listener , method: 'PreFoo' } ) 
+      @dispatcher.remove_listener( :pre_foo, { object: @listener , method: 'PreFoo' } ) 
       assert_equal false, @dispatcher.has_listeners?( PREFOO )
-      @dispatcher.remove_listeners( :not_exists, { object: @listener , method: 'PreFoo' } ) 
+      @dispatcher.remove_listener( :not_exists, { object: @listener , method: 'PreFoo' } ) 
    end
 end
 
