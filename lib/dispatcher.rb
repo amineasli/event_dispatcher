@@ -29,7 +29,7 @@ module EventDispatcher
          @sorted[event_name].clear unless @sorted[event_name].nil?
       end
        
-      def remove_listeners( event_name, listener )
+      def remove_listener( event_name, listener )
          return if @listeners[event_name].nil?
 
          @listeners[event_name].each_pair do |priority, listeners|
