@@ -1,6 +1,5 @@
 module EventDispatcher
    class Dispatcher
-      attr_accessor :listeners
       def initialize
          @listeners = {}
          @sorted = {}
@@ -21,20 +20,38 @@ module EventDispatcher
       def has_listeners?( event_name = nil )
           get_listeners( event_name ).count > 0 ? true : false
       end
-
+      
       def add_listener( event_name, listener, priority = 0 )
          @listeners[event_name] ||= {}
          @listeners[event_name][priority] ||= [] 
          @listeners[event_name][priority].push(listener)
+
          @sorted[event_name].clear unless @sorted[event_name].nil?
       end
-    
-      def sort_listeners!( event_name )
-         @sorted[event_name] = [] 
-         
-         if @listeners[event_name]
-            @sorted[event_name] = @listeners[event_name].sort
+       
+      def remove_listeners( event_name, listener )
+         return if @listeners[event_name].nil?
+
+         @listeners[event_name].each_pair do |priority, listeners|
+           listeners.delete_if { |item| p listener == item  }
          end
+
+         @sorted[event_name].clear unless @sorted[event_name].nil?
       end
+      
+      private 
+    
+         def sort_listeners!( event_name )
+            @sorted[event_name] = [] 
+            
+            if @listeners[event_name]
+               @sorted[event_name] = @listeners[event_name].sort
+            end
+         end
+      
+         def do_dispatch( event_name, event = nil )
+            
+         end
+
    end
 end
