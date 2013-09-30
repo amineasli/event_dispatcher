@@ -20,6 +20,7 @@ class DispatcherTest < Test::Unit::TestCase
    def test_add_listener
       @dispatcher.add_listener( :pre_foo, { object: @listener, method: 'PreFoo' } )
       @dispatcher.add_listener( :post_foo, { object: @listener, method: 'PostFoo' } )
+      @dispatcher.add_listener( :post_foo, { object: @listener, method: 'PostFoo' } )
       assert_equal true, @dispatcher.has_listeners?( PREFOO )
       assert_equal true, @dispatcher.has_listeners?( POSTFOO )
       assert_equal 1, @dispatcher.get_listeners( PREFOO ).length
@@ -61,10 +62,39 @@ class DispatcherTest < Test::Unit::TestCase
       assert_equal false, @dispatcher.has_listeners?( PREFOO )
       @dispatcher.remove_listener( :not_exists, { object: @listener , method: 'PreFoo' } ) 
    end
+  
+   def test_dispatcher_for_object
+      @dispatcher.add_listener( :pre_foo, { object: @listener, method: 'pre_foo_invoked!' } ) 
+      @dispatcher.add_listener( :post_foo, { object: @listener, method: 'post_foo_invoked!' } )
+
+      @foo_bar = TestFooBar.new( 'foo', 'bar' )
+      @test_event = TestEvent.new( @foo_bar )
+
+      @dispatcher.dispatch( :pre_foo, @test_event ) 
+      assert_equal true, @listener.pre_foo_invoked
+      assert_equal false, @listener.post_foo_invoked
+      @dispatcher.dispatch( :post_foo, @test_event ) 
+ 
+      assert_equal true, @listener.post_foo_invoked
+   end
+   
+   def test_dispatcher_for_block
+      invoked = 0
+      block1 = lambda do |event|
+         invoked += 1
+      end
+
+      @dispatcher.add_listener( :pre_foo, block1 ) 
+
+      @foo_bar = TestFooBar.new( 'foo', 'bar' )
+      @test_event = TestEvent.new( @foo_bar )
+
+      @dispatcher.dispatch( :pre_foo, @test_event ) 
+      assert_equal 1, invoked
+   end
 end
 
 class TestEventListener
-   include EventDispatcher::Event
 
    attr_reader :pre_foo_invoked, :post_foo_invoked
 
@@ -83,4 +113,24 @@ class TestEventListener
    end
 end
 
+class TestFooBar
+   attr_accessor :foo, :bar
+  
+   def initialize( foo, bar )
+      @foo = foo 
+      @bar = bar
+   end
 
+   def foo_bar
+      @foo + '-' + @bar
+   end
+end
+
+class TestEvent
+   include EventDispatcher::Event
+   attr_reader :foo_bar
+
+   def initialize( foo_bar )
+      @foo_bar = foo_bar
+   end
+end
