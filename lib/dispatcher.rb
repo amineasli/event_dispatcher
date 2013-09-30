@@ -38,19 +38,37 @@ module EventDispatcher
 
          @sorted[event_name].clear unless @sorted[event_name].nil?
       end
+    
+      def dispatch( event_name, event = nil )
+         return if @listeners[event_name].nil? || event.nil?
+         
+         do_dispatch( get_listeners( event_name ), event )
+  
+      end
       
       private 
     
          def sort_listeners!( event_name )
-            @sorted[event_name] = [] 
+            @sorted[event_name] = {} 
             
             if @listeners[event_name]
                @sorted[event_name] = @listeners[event_name].sort
+               
             end
          end
       
-         def do_dispatch( event_name, event = nil )
-            
+         def do_dispatch( listeners, event )
+            listeners.each do |priority|
+               priority[1].each do |listener|
+                  if listener.is_a?(Hash) 
+                     listener[:object].send( listener[:method], event  )
+                  elsif listener.respond_to?(:call)
+                     listener.call( event )   
+                  else
+                     raise ArgumentError.new("Listener must be a Hash or Block")
+                  end
+                end
+            end
          end
 
    end
