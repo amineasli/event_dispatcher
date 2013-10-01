@@ -33,7 +33,7 @@ module EventDispatcher
          return if @listeners[event_name].nil?
 
          @listeners[event_name].each_pair do |priority, listeners|
-           listeners.delete_if { |item| p listener == item  }
+           listeners.delete_if { |item| listener == item  }
          end
 
          @sorted[event_name].clear unless @sorted[event_name].nil?
