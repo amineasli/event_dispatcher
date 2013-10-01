@@ -17,7 +17,7 @@ EventDispatcher implements a lightweight version of the Observer design pattern.
        puts event.foo_bar
     end
     
-    dispatcher.add_listener( 'foo_bar_event', listener )
+    dispatcher.add_listener( 'foo_bar_action', listener )
     
     class FooBarEvent
        include EventDispatcher::Event
