@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'event_dispatcher'
-  s.version     = '0.0.2.pre'
+  s.version     = '0.0.2'
   s.date        = '2013-10-01'
   s.summary     = "EventDispatcher implements a lightweight version of the Observer design pattern."
   s.description = "EventDispatcher implements a lightweight version of the Observer design pattern. It's a ruby port of the well known Symfony EventDispatcher"
