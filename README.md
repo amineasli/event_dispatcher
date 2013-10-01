@@ -26,6 +26,6 @@ EventDispatcher implements a lightweight version of the Observer design pattern.
        end
     end
     
-    dispatcher.dispatch( 'foo_bar_event', FooBarEvent.new )
+    dispatcher.dispatch( 'foo_bar_action', FooBarEvent.new )
 
 
