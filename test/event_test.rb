@@ -1,5 +1,5 @@
 require 'test/unit'
-require '../lib/event.rb'
+require 'event_dispatcher'
 
 class EventTest < Test::Unit::TestCase
    def setup

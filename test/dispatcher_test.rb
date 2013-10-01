@@ -1,6 +1,5 @@
 require 'test/unit'
-require '../lib/dispatcher.rb'
-require '../lib/event.rb'
+require 'event_dispatcher'
 
 class DispatcherTest < Test::Unit::TestCase
    PREFOO = :pre_foo
