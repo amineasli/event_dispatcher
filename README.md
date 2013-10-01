@@ -5,28 +5,27 @@ EventDispatcher implements a lightweight version of the Observer design pattern.
 
 ## Install
 
- ```gem install event_dispatcher```
+    gem install event_dispatcher
 
 ## Usage
 
- ``` require 'event_dispatcher'
+    require 'event_dispatcher'
 
- dispatcher = EventDispatcher::Dispatcher.new
- 
- listener = lambda do |event|
-    puts event.foo_bar
- end
- 
- dispatcher.add_listener( 'foo_bar_event', listener)
- 
- class FooBarEvent
-    include EventDispatcher::Event
-    def foo_bar
-       'FooBar is working!'
+    dispatcher = EventDispatcher::Dispatcher.new
+    
+    listener = lambda do |event|
+       puts event.foo_bar
     end
- end
- 
- dispatcher.dispatch( 'foo_bar_event', FooBarEvent.new )
- ```
+    
+    dispatcher.add_listener( 'foo_bar_event', listener)
+    
+    class FooBarEvent
+       include EventDispatcher::Event
+       def foo_bar
+          'FooBar is working!'
+       end
+    end
+    
+    dispatcher.dispatch( 'foo_bar_event', FooBarEvent.new )
 
 
