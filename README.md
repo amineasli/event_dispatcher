@@ -3,7 +3,8 @@ event_dispatcher
 
 [![Gem Version](https://badge.fury.io/rb/event_dispatcher.png)](http://badge.fury.io/rb/event_dispatcher)
 
-event_dispatcher gem provides a simple observer implementation, allowing you to subscribe and listen for events in your application easily and elegantly. It is very strongly inspired by the [Symfony EventDispatcher component](http://symfony.com/components/EventDispatcher)
+event_dispatcher gem provides a simple observer implementation, allowing you to subscribe and listen for events in your application with a simple and effective way. 
+It is very strongly inspired by the [Symfony EventDispatcher component](http://symfony.com/components/EventDispatcher)
 
 ## Install
 Install the gem :
