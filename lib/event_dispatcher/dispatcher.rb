@@ -36,13 +36,13 @@ module EventDispatcher
          sort_listeners!(event_name)
       end
  
-      # Removes a collection of event listeners from the specified event, or reset the entire container of listeners if none event is given. 
+      # Removes a collection of event listeners from the specified event, or reset the entire container of listeners if no event is given. 
       def remove_listeners!(event_name = nil)
-         event_name = symbolize_key(event_name) 
          if event_name.nil?
             @listeners.clear
-         elsif @listeners.key?(event_name)
-            @listeners.delete(event_name)
+         else 
+             event_name = symbolize_key(event_name) 
+             @listeners.delete(event_name) if @listeners.key?(event_name)
          end
       end
 
