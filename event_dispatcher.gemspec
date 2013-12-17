@@ -3,8 +3,8 @@ Gem::Specification.new do |s|
   s.name        = 'event_dispatcher'
   s.version     = '0.1.0'
   s.date        = '2013-12-17'
-  s.summary     = "Event_dispatcher implements a lightweight version of the Observer design pattern."
-  s.description = "Event_dispatcher gem provides a simple observer implementation, allowing you to subscribe and listen for events in your application easily and elegantly."
+  s.summary     = "event_dispatcher implements a lightweight version of the Observer design pattern."
+  s.description = "event_dispatcher gem provides a simple observer implementation, allowing you to subscribe and listen for events in your application easily and elegantly."
   s.required_ruby_version = '>= 1.9.3'
   s.author       = 'Amine Asli'
   s.email        = 'phobosapp@yahoo.com'
