@@ -18,7 +18,7 @@ Accessing the gem :
 
 ## Usage
 ### Creating an Event
-When an event is dispatched, it's identified by a unique name, which any number of listeners might be listening to. An Event instance is also created and passed to all of the listeners : 
+When an event is dispatched, it's identified by a unique name, which any number of listeners might be listening to. An event instance is also created and passed to all of the listeners : 
 
     class UserEvent
        attr_reader :user, :login_time
@@ -60,7 +60,8 @@ Or using a class instance with a handler method for the event :
     listener = UserEventListener.new     
     dispatcher.add_listener(:user_login, listener.method(:handle))
 
-You may also specify a priority when subscribing to events. Listeners with higher priority will be run first 
+You may also specify a priority when subscribing to events. Listeners with higher priority will be run first :
+
     dispatcher.add_listener(:user_login, listener1, 1) 
     dispatcher.add_listener(:user_login, listener2, 2) 
     dispatcher.add_listener(:user_login, listener3, 3) 
