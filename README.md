@@ -87,6 +87,15 @@ You may wish to stop the propagation of an event to other listeners. To do so yo
        event.stop_propagation = true
     end
 
+### Removing Listeners
+Removes an event listener from the specified event :
+
+    dispatcher.remove_listener!(:user_login, listener)
+
+Removes a collection of listeners from the specified event :
+
+    dispatcher.remove_listeners!(:user_login) # calling remove_listeners! without argument will simply reset the entire listeners container
+
 ## Tests
     rake test
 
