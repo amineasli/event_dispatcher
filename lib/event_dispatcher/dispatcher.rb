@@ -25,8 +25,6 @@ module EventDispatcher
          sort_listeners!(event_name)
       end
 
-      alias_method :<<, :add_listener
-
       # Removes an event listener from the specified event.
       def remove_listener!(event_name, listener)
          event_name = symbolize_key(event_name) 
@@ -36,7 +34,7 @@ module EventDispatcher
          sort_listeners!(event_name)
       end
  
-      # Removes a collection of event listeners from the specified event, or reset the entire container of listeners if no event is given. 
+      # Removes a collection of event listeners attached to a specified event, or reset the entire container of listeners if no event is given. 
       def remove_listeners!(event_name = nil)
          if event_name.nil?
             @listeners.clear
