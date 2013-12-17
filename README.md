@@ -74,7 +74,7 @@ Notifies all listeners of the given event, so the event instance is then passed 
     dispatcher.dispatch(:user_login, event)
 
 ### Stopping Event propagation
-You may wish to stop the propagation of an event to other listeners. To do so you need to first mixin the module Event in your custom event class, then setting the event instance variable `stop_propagation` to true : 	
+You may wish to stop the propagation of an event to other listeners. To do so you need to first mixing the module Event in your custom event class, then setting the event instance variable `stop_propagation` to true : 	
 
     class UserEvent
        include EventDispatcher::Event
