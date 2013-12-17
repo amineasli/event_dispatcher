@@ -3,7 +3,7 @@ Ruby-EventDispatcher
 
 [![Gem Version](https://badge.fury.io/rb/event_dispatcher.png)](http://badge.fury.io/rb/event_dispatcher)
 
-EventDispatcher implements a lightweight version of the Observer design pattern. It's a Ruby port of the well known Symfony EventDispatcher
+Event_dispatcher gem provides a simple observer implementation, allowing you to subscribe and listen for events in your application easily and elegantly.
 
 ## Install
 

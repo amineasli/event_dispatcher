@@ -1,15 +1,9 @@
 module EventDispatcher
    module Event
-      def propagation_stopped
-         @propagation_stopped ||= false
-      end
-
-      def stop_propagation
-         @propagation_stopped = true
-      end
-
-      def propagation_stopped?
-         propagation_stopped
+      attr_accessor :stop_propagation
+      # A listener can prevent any other listeners from being called. 
+      def initialize
+         @stop_propagation = false
       end
    end
 end

@@ -1,0 +1,68 @@
+require 'test/unit'
+#require 'event_dispatcher'
+require '../lib/event_dispatcher/dispatcher'
+
+
+class DispatcherTest < Test::Unit::TestCase
+   PREFOO = :pre_foo
+   POSTFOO = :post_foo 
+
+   def setup
+      @dispatcher = EventDispatcher::Dispatcher.new
+      @listener = TestEventListener.new
+   end
+
+   def test_initial_state
+      assert_empty @dispatcher.listeners
+
+      assert_equal false, @dispatcher.has_listeners?(PREFOO) 
+      assert_equal false, @dispatcher.has_listeners?(POSTFOO) 
+   end
+ 
+   def test_add_listener
+      @dispatcher.add_listener :pre_foo, @listener
+      @dispatcher.add_listener :post_foo, @listener 
+
+      assert_equal true, @dispatcher.has_listeners?(PREFOO)
+      assert_equal true, @dispatcher.has_listeners?(POSTFOO)
+
+      assert_equal 1, @dispatcher.listeners[PREFOO].size
+      assert_equal 1, @dispatcher.listeners[PREFOO].size
+      assert_equal 2, @dispatcher.listeners.size
+   end
+   
+   def test_remove_listeners
+      @dispatcher.remove_listeners
+      assert_empty @dispatcher.listeners
+
+      assert_equal false, @dispatcher.has_listeners?(PREFOO)
+      assert_equal false, @dispatcher.has_listeners?(POSTFOO)
+
+      @dispatcher.add_listener(PREFOO, { object: @listener, method: 'PreFoo' }, 10)
+      assert_equal true, @dispatcher.has_listeners?( PREFOO )
+      @dispatcher.remove_listener( :pre_foo, { object: @listener , method: 'PreFoo' } ) 
+      assert_equal false, @dispatcher.has_listeners?( PREFOO )
+      @dispatcher.remove_listener( :not_exists, { object: @listener , method: 'PreFoo' } ) 
+   end
+
+end
+
+class TestEventListener
+
+   attr_reader :pre_foo_invoked, :post_foo_invoked
+
+   def initialize
+      @pre_foo_invoked = false
+      @post_foo_invoked = false
+   end
+
+   def pre_foo_invoked!(event)
+      @pre_foo_invoked = true
+   end
+
+   def post_foo_invoked!(event)
+      @post_foo_invoked = true
+      event.stop_propagation
+   end
+end
+
