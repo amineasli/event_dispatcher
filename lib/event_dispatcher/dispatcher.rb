@@ -66,8 +66,7 @@ module EventDispatcher
             @listeners[event_name].sort_by! { |l| l.priority }
          end
 
-         # Calls the block or the listener instance method which is responsible of handling the event object.        
-        
+         # Calls the block or the listener instance method which is responsible of handling the event object. 
          def invoke_callable(callable, event)
             raise ArgumentError.new("Listener must be a block or a callable object's method") unless callable.respond_to?(:call)
             callable.call(event)   
