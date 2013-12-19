@@ -92,8 +92,7 @@ class DispatcherTest < Test::Unit::TestCase
   
   def test_dispatcher_for_block
       invoked = 0
-      foo = '
-'
+      foo = ''
       block1 = lambda do |event|
          invoked += 1
          foo = event.foo
