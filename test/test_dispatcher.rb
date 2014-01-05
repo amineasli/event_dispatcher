@@ -83,11 +83,11 @@ class DispatcherTest < Test::Unit::TestCase
       assert_equal [:pre_foo, :post_foo], @dispatcher.listeners.keys 
       @dispatcher.listeners
 
-      assert_equal true,  @dispatcher.listeners[PREFOO].first.include?(-10)
-      assert_equal true,  @dispatcher.listeners[PREFOO].last.include?(10)
+      assert_equal true,  @dispatcher.listeners[PREFOO].last.include?(-10)
+      assert_equal true,  @dispatcher.listeners[PREFOO].first.include?(10)
       assert_equal true,  @dispatcher.listeners[PREFOO][1].include?(0)
-      assert_equal true,  @dispatcher.listeners[POSTFOO].first.include?(0)
-      assert_equal true,  @dispatcher.listeners[POSTFOO].last.include?(10)
+      assert_equal true,  @dispatcher.listeners[POSTFOO].last.include?(0)
+      assert_equal true,  @dispatcher.listeners[POSTFOO].first.include?(10)
   end
   
   def test_dispatcher_for_block
@@ -123,8 +123,8 @@ class DispatcherTest < Test::Unit::TestCase
       @dispatcher.add_listener(:pre_foo, other_listener.method(:handle))
       @dispatcher.dispatch(:pre_foo, test_event)
 
-      assert_equal 'foo', other_listener.bar
-      assert_equal 'bar', @listener.bar
+      assert_equal 'bar', other_listener.bar
+      assert_equal 'foo', @listener.bar
   end
    
 end

@@ -63,7 +63,7 @@ module EventDispatcher
 
          # Sorts the list of listeners attached to given event by priority. The higher the priority, the earlier the listener is called.
          def sort_listeners!(event_name)
-            @listeners[event_name].sort_by! { |l| l.priority }
+            @listeners[event_name].sort_by! { |l| -l.priority }
          end
 
          # Calls the block or the listener instance method which is responsible of handling the event object. 
