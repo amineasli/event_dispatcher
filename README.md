@@ -62,9 +62,9 @@ Or using a class instance with a handler method for the event :
 
 You may also specify a priority when subscribing to events. Listeners with higher priority will be run first :
 
-    dispatcher.add_listener(:user_login, listener1, 1) 
-    dispatcher.add_listener(:user_login, listener2, 2) 
-    dispatcher.add_listener(:user_login, listener3, 3) 
+    dispatcher.add_listener(:user_login, listener1, 15) 
+    dispatcher.add_listener(:user_login, listener2, 10) 
+    dispatcher.add_listener(:user_login, listener3, 2) 
 
 
 ### Dispatching an Event
