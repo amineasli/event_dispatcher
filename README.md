@@ -99,7 +99,7 @@ Removes a collection of listeners from the specified event :
 ## Tests
     rake test
 
-## Licence
-LGPL, see LICENCE.
+## License
+LGPL, see LICENSE.
 
 
